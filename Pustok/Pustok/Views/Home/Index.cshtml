@@ -1,0 +1,38 @@
+﻿@model List<Product>
+@{
+    Layout = "_ClientLayout";
+}
+
+<partial name="Partials/Client/Home/_SliderAreaPartialView" />
+
+<partial name="Partials/Client/Home/_ShippingAreaPartialView" />
+
+<partial name="Partials/Client/Home/_ProductAreaPartialView" />
+
+<partial name="Partials/Client/Home/_NewProductAreaPartialView" />
+
+<partial name="Partials/Client/Home/_BlogAreaPartialView" />
+
+<partial name="Partials/Client/_FooterPartialView" />
+
+@section custom_scripts{
+    <script>
+        function ShowDetails(id) {
+            let modalElement = $("#product-details-modal");
+            let modalBodyElement = $("#product-details-modal-body");
+
+            $.ajax({
+                url: "https://localhost:7258/Product/ProductDetailsModalView?id=" + id,
+                success: function (data) {
+                    modalBodyElement.html(data);
+
+                    $("#product-details-modal-colors").niceSelect();
+                    $("#product-details-modal-sizes").niceSelect();
+
+                    modalElement.modal('show');
+                }
+            });
+        }
+
+    </script>
+}
